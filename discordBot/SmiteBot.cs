@@ -7,17 +7,10 @@ using Discord;
 using System.IO;
 using System.Diagnostics;
 
-namespace discordTests
+namespace discordBot
 {
     public class SmiteBot : IDiscordMessageBot
     {
-        public class SmiteBotException : Exception
-        {
-            public SmiteBotException(string msg) : base(msg)
-            {
-
-            }
-        }
 
         private SmiteAPI.Smite Smite;
         private readonly string _smiteImageMakerPath;
@@ -44,10 +37,7 @@ namespace discordTests
                     var lookupName = rankedMatch.Matches["ranked"];
                     var text = await PrintPlayerRanked(lookupName);
 
-                    if (!string.IsNullOrEmpty(text))
-                    {
-                        await SendMessageAsync(msg.Channel, text);
-                    }
+
                     return;
                 }
 
@@ -55,8 +45,6 @@ namespace discordTests
                 if (matchMatch.Success)
                 {
                     var lookupName = matchMatch.Matches["match"];
-
-
                     await SendPlayerLastMatchEmbed(lookupName, msg.Channel);
                     return;
                 }
@@ -68,20 +56,13 @@ namespace discordTests
                     {
                         var text = await PrintPlayer(lookupName);
 
-                        if (!string.IsNullOrEmpty(text))
-                        {
-                            await SendMessageAsync(msg.Channel, text);
-                        }
+
                         return;
                     }
                 }
             }
         }
 
-        private Task SendMessageAsync(ISocketMessageChannel channel, string text)
-        {
-            return channel.SendMessageAsync($"```\n{text}```");
-        }
         private async Task SendImageAndDeleteAsync(ISocketMessageChannel channel, string file)
         {
             await channel.SendFileAsync(file);

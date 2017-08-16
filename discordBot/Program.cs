@@ -4,7 +4,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace discordTests
+namespace discordBot
 {
     class Program
     {
@@ -40,7 +40,20 @@ namespace discordTests
 
         private async Task MessageReceived(SocketMessage arg)
         {
-            await Task.WhenAll(_messageBots.Select((A) => A.ProcessMessage(arg)).ToArray());
+            try
+            {
+                await Task.WhenAll(_messageBots.Select((A) => A.ProcessMessage(arg)).ToArray());
+            }
+            catch (SmiteBotException ex)
+            {
+                await SendMessageAsync(arg.Channel, ex.Message);
+                await Log(new LogMessage(LogSeverity.Debug, "SmiteBot", ex.Message));
+            }
+        }
+
+        private static Task SendMessageAsync(ISocketMessageChannel channel, string text)
+        {
+            return channel.SendMessageAsync($"```\n{text}```");
         }
 
         private Task Log(LogMessage message)
