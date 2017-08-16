@@ -15,6 +15,8 @@ namespace SmiteImageMaker
     {
         protected override void OnStartup(StartupEventArgs e)
         {
+            var x = new DesignTimeLastMatch();
+
             if (e.Args.Length < 2)
             {
                 Shutdown(0x10);

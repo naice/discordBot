@@ -8,7 +8,7 @@ namespace SmiteImageMaker
 {
     static class DesignTimeHelper
     {
-        public static void CreateMe<T>(T me, string json)
+        public static void CreateMe<T>(object me, string json)
         {
             CopyProperties(Newtonsoft.Json.JsonConvert.DeserializeObject<T>(json), me);
         }
