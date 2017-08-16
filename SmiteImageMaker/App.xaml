@@ -1,0 +1,27 @@
+﻿<Application x:Class="SmiteImageMaker.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:SmiteImageMaker">
+    <Application.Resources>
+        <local:PentaKillValueConverter x:Key="PentaKillValueConverter"/>
+        <local:MatchMinutesValueConverter x:Key="MatchMinutesValueConverter"/>
+        <local:GoldPerMinuteValueConverter x:Key="GoldPerMinuteValueConverter"/>
+
+        <SolidColorBrush x:Key="Accent" Color="#88FFE500"/>
+        <SolidColorBrush x:Key="Foreground" Color="#88ffffff"/>
+        <SolidColorBrush x:Key="ForegroundDimm" Color="#88aaaaaa"/>
+
+        <Style TargetType="TextBlock" x:Key="FontLight">
+            <Setter Property="FontFamily" Value="Assets/Font/HelveticaNeue-Light.ttf#HelveticaNeue"/>
+            <Setter Property="Foreground" Value="{StaticResource Foreground}"/>
+        </Style>
+        <Style TargetType="TextBlock" x:Key="FontMedium">
+            <Setter Property="FontFamily" Value="Assets/Font/HelveticaNeue-Medium.ttf#HelveticaNeue"/>
+            <Setter Property="Foreground" Value="{StaticResource Foreground}"/>
+        </Style>
+        <Style TargetType="TextBlock" x:Key="FontUltraLight">
+            <Setter Property="FontFamily" Value="Assets/Font/HelveticaNeue-UltraLight.ttf#HelveticaNeue"/>
+            <Setter Property="Foreground" Value="{StaticResource Foreground}"/>
+        </Style>
+    </Application.Resources>
+</Application>

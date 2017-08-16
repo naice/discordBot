@@ -1,0 +1,104 @@
+﻿<UserControl x:Class="SmiteImageMaker.LastMatchControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SmiteImageMaker"
+             mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance Type=local:DesignTimeLastMatch, IsDesignTimeCreatable=True}"
+             Width="400" Height="250">
+    <Grid>
+        <Grid.OpacityMask>
+            <VisualBrush Visual="{Binding ElementName=BorderMask}"/>
+        </Grid.OpacityMask>
+        <Border CornerRadius="15" Name="BorderMask" Background="White" />
+        <Image Source="/Assets/bg02.jpg" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Top" Height="500" />
+        <Rectangle Fill="#aa000000"/>
+        <Grid Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBlock Style="{StaticResource FontMedium}" FontSize="20">
+                <Run Text="{Binding playerName}"/>
+                <Run Text="-"/>
+                <Run Text="{Binding God}"/>
+            </TextBlock>
+            <TextBlock Style="{StaticResource FontLight}" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="{StaticResource Accent}">
+                <Run Text="{Binding Queue}"/>
+                <Run Text="{Binding Minutes ,Converter={StaticResource MatchMinutesValueConverter}}"/>
+                <Run Text="-"/>
+                <Run Text="{Binding Win_Status}"/>
+            </TextBlock>
+            <Rectangle Height="0.6" Fill="#77FFFFFF" VerticalAlignment="Bottom"/>
+            <Grid Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,12,0,0">
+                <TextBlock Style="{StaticResource FontUltraLight}" FontSize="16">
+                    <Run Text="{Binding Gold}" />
+                    <Run Text="Gold" />
+                    <Run Text="/" />
+                    <Run Text="{Binding Converter={StaticResource GoldPerMinuteValueConverter}, Mode=OneWay}" />
+                    <Run Text="GPM" />
+                </TextBlock>
+            </Grid>
+
+            <Grid Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Right">
+                <TextBlock Style="{StaticResource FontUltraLight}" FontSize="35" HorizontalAlignment="Center">
+                    <Run Text="{Binding Kills}" />
+                    <Run Text="/" />
+                    <Run Text="{Binding Deaths}" />
+                    <Run Text="/" />
+                    <Run Text="{Binding Assists}" />
+                </TextBlock>
+            </Grid>
+            <Grid Grid.Row="1" VerticalAlignment="Bottom" Margin="0,0,0,50" Width="240" HorizontalAlignment="Left">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="80"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" Width="80" Height="40">
+                    <TextBlock Style="{StaticResource FontLight}" FontSize="16" Text="Damage" HorizontalAlignment="Center"/>
+                    <Rectangle Height=".6" Fill="{StaticResource Foreground}"/>
+                    <TextBlock Style="{StaticResource FontLight}" FontSize="16" Text="{Binding Damage}" HorizontalAlignment="Center"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1" Width="80" Height="40">
+                    <TextBlock Style="{StaticResource FontLight}" FontSize="16" Text="Minions" HorizontalAlignment="Center"/>
+                    <Rectangle Height=".6" Fill="{StaticResource Foreground}"/>
+                    <TextBlock Style="{StaticResource FontLight}" FontSize="16" Text="{Binding Damage_Bot}" HorizontalAlignment="Center"/>
+                </StackPanel>
+                <StackPanel Grid.Column="2" Width="80" Height="40">
+                    <TextBlock Style="{StaticResource FontLight}" FontSize="16" Text="Structur" HorizontalAlignment="Center"/>
+                    <Rectangle Height=".6" Fill="{StaticResource Foreground}"/>
+                    <TextBlock Style="{StaticResource FontLight}" FontSize="16" Text="{Binding Damage_Structure}" HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Grid>
+            <Grid Grid.Row="1" VerticalAlignment="Bottom" Margin="0,0,0,0" Width="240" HorizontalAlignment="Left">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="80"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" Width="80" Height="40">
+                    <TextBlock Style="{StaticResource FontLight}" FontSize="16" Text="Healing" HorizontalAlignment="Center"/>
+                    <Rectangle Height=".6" Fill="{StaticResource Foreground}"/>
+                    <TextBlock Style="{StaticResource FontLight}" FontSize="16" Text="{Binding Healing}" HorizontalAlignment="Center"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1" Width="80" Height="40">
+                    <TextBlock Style="{StaticResource FontLight}" FontSize="16" Text="Minions" HorizontalAlignment="Center"/>
+                    <Rectangle Height=".6" Fill="{StaticResource Foreground}"/>
+                    <TextBlock Style="{StaticResource FontLight}" FontSize="16" Text="{Binding Healing_Bot}" HorizontalAlignment="Center"/>
+                </StackPanel>
+                <StackPanel Grid.Column="2" Width="80" Height="40">
+                    <TextBlock Style="{StaticResource FontLight}" FontSize="16" Text="Self" HorizontalAlignment="Center"/>
+                    <Rectangle Height=".6" Fill="{StaticResource Foreground}"/>
+                    <TextBlock Style="{StaticResource FontLight}" FontSize="16" Text="{Binding Healing_Player_Self}" HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Grid>
+            <Image Grid.Row="1" Source="{Binding Multi_kill_Max, Converter={StaticResource PentaKillValueConverter}}" Width="100" Height="100" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                <Image.Effect>
+                    <DropShadowEffect BlurRadius="5" Color="Red" ShadowDepth="1"/>
+                </Image.Effect>
+            </Image>
+        </Grid>
+    </Grid>
+</UserControl>
