@@ -49,6 +49,23 @@ namespace discordBot
                 await SendMessageAsync(arg.Channel, ex.Message);
                 await Log(new LogMessage(LogSeverity.Debug, "SmiteBot", ex.Message));
             }
+            catch (AggregateException aggregate)
+            {
+                // unravel
+                var smiteBotExs = aggregate.InnerExceptions
+                    .Where((ex) => ex is SmiteBotException);
+                
+                foreach (var ex in smiteBotExs)
+                {
+                    await SendMessageAsync(arg.Channel, ex.Message);
+                    await Log(new LogMessage(LogSeverity.Debug, "SmiteBot", ex.Message));
+                }
+
+                // throw first other
+                var any = aggregate.InnerExceptions.FirstOrDefault((ex) => !(ex is SmiteBotException));
+                if (any != null)
+                    throw any;
+            }
         }
 
         private static Task SendMessageAsync(ISocketMessageChannel channel, string text)

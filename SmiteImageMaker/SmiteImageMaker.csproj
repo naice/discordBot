@@ -61,6 +61,11 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="_Controls\DesignTimeHelper.cs" />
+    <Compile Include="_Controls\DesignTimePlayer.cs" />
+    <Compile Include="_Controls\PlayerControl.xaml.cs">
+      <DependentUpon>PlayerControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ValueConverters.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -108,6 +113,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="_Controls\PlayerControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="_Controls\LastMatchControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

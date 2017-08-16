@@ -35,9 +35,7 @@ namespace discordBot
                 if (rankedMatch.Success)
                 {
                     var lookupName = rankedMatch.Matches["ranked"];
-                    var text = await PrintPlayerRanked(lookupName);
-
-
+                    await SendPlayerRanked(lookupName, msg.Channel);
                     return;
                 }
 
@@ -45,7 +43,7 @@ namespace discordBot
                 if (matchMatch.Success)
                 {
                     var lookupName = matchMatch.Matches["match"];
-                    await SendPlayerLastMatchEmbed(lookupName, msg.Channel);
+                    await SendPlayerLastMatch(lookupName, msg.Channel);
                     return;
                 }
 
@@ -54,29 +52,20 @@ namespace discordBot
                     var lookupName = cmd.Result[0];
                     if (lookupName.Length > 3)
                     {
-                        var text = await PrintPlayer(lookupName);
-
-
+                        await SendPlayer(lookupName, msg.Channel);
                         return;
                     }
                 }
             }
         }
 
-        private async Task SendImageAndDeleteAsync(ISocketMessageChannel channel, string file)
-        {
-            await channel.SendFileAsync(file);
-
-            File.Delete(file);
-        }
         private bool IsPlayerValid(string lookupName, SmiteAPI.Model.Player player)
         {
             if (player != null && player.Name.ToLower().Contains(lookupName.ToLower()))
                 return true;
 
             return false;
-        }
-
+        }        
         private string RunSmiteImageMaker(SmiteAPI.Model.SmiteImageMaker<object> data)
         {
             var guid = Guid.NewGuid();
@@ -92,9 +81,9 @@ namespace discordBot
                 if (File.Exists(uniqueImagePath))
                     return uniqueImagePath;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                throw ex;
             }
 
 #if RELEASE
@@ -102,8 +91,19 @@ namespace discordBot
 #endif
             return null;
         }
+        private async Task SendImageAndDelete(string lookupName, ISocketMessageChannel channel, SmiteAPI.Model.SmiteImageMaker<object> imageMakerData)
+        {
+            var imageFile = RunSmiteImageMaker(imageMakerData);
+            if (imageFile == null)
+            {
+                throw new SmiteBotException($"Unable to generate Image for {lookupName}");
+            }
+            await channel.SendFileAsync(imageFile);
 
-        private async Task SendPlayerLastMatchEmbed(string lookupName, ISocketMessageChannel channel)
+            File.Delete(imageFile);
+        }
+
+        private async Task SendPlayerLastMatch(string lookupName, ISocketMessageChannel channel)
         {
             var lastMatches = await Smite.GetMatchHistory(lookupName);
             if (lastMatches == null || lastMatches.Length <= 0)
@@ -117,17 +117,48 @@ namespace discordBot
                 throw new SmiteBotException($"No Matchdata found for {lookupName}!");
             }
 
-            var imageMakerData = new SmiteAPI.Model.SmiteImageMaker<object>();
-            imageMakerData.ImageType = SmiteAPI.Model.SmiteImageMakerImageType.LastMatch;
-            imageMakerData.Data = lastMatch;
-
-            var imageFile = RunSmiteImageMaker(imageMakerData);
-            if (imageFile != null)
+            var imageMakerData = new SmiteAPI.Model.SmiteImageMaker<object>()
             {
-                await channel.SendFileAsync(imageFile);
-            }
+                ImageType = SmiteAPI.Model.SmiteImageMakerImageType.LastMatch,
+                Data = lastMatch
+            };
+
+            await SendImageAndDelete(lookupName, channel, imageMakerData);
         }
-        
+        private async Task SendPlayerRanked(string lookupName, ISocketMessageChannel channel)
+        {
+            var player = await Smite.GetPlayer(lookupName);
+            if (!IsPlayerValid(lookupName, player))
+            {
+                throw new SmiteBotException($"The player {lookupName} is unknown!");
+            }
+
+            var imageMakerData = new SmiteAPI.Model.SmiteImageMaker<object>()
+            {
+                ImageType = SmiteAPI.Model.SmiteImageMakerImageType.RankedStats,
+                Data = player
+            };
+
+            await SendImageAndDelete(lookupName, channel, imageMakerData);
+        }
+        private async Task SendPlayer(string lookupName, ISocketMessageChannel channel)
+        {
+            var player = await Smite.GetPlayer(lookupName);
+            if (!IsPlayerValid(lookupName, player))
+            {
+                throw new SmiteBotException($"The player {lookupName} is unknown!");
+            }
+
+            var imageMakerData = new SmiteAPI.Model.SmiteImageMaker<object>()
+            {
+                ImageType = SmiteAPI.Model.SmiteImageMakerImageType.Player,
+                Data = player
+            };
+
+            await SendImageAndDelete(lookupName, channel, imageMakerData);
+        }
+
+
         private async Task<string> PrintPlayerRanked(string lookupName)
         {
             var player = await Smite.GetPlayer(lookupName);
