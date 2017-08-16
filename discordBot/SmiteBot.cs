@@ -58,14 +58,6 @@ namespace discordTests
 
 
                     await SendPlayerLastMatchEmbed(lookupName, msg.Channel);
-
-                    //var text = await PrintPlayerLastMatch(lookupName);
-
-                    //if (!string.IsNullOrEmpty(text))
-                    //{
-                    //    await SendMessageAsync(msg.Channel, text);
-                    //}
-
                     return;
                 }
 
@@ -154,47 +146,7 @@ namespace discordTests
                 await channel.SendFileAsync(imageFile);
             }
         }
-
-        private async Task<string> PrintPlayerLastMatch(string lookupName)
-        {
-            var lastMatches = await Smite.GetMatchHistory(lookupName);
-            if (lastMatches == null || lastMatches.Length <= 0)
-            {
-                return $"No Matchdata found for {lookupName}!";
-            }
-
-            var lastMatch = lastMatches[0];
-            if (lastMatch == null || !string.IsNullOrEmpty(lastMatch.ret_msg))
-            {
-                return $"No Matchdata found for {lookupName}!";
-            }
-
-            var lastMatchDuration = TimeSpan.FromMinutes(lastMatch.Minutes);
-            string lastMatchDurationText = string.Format("{0:00}:{1:00}", lastMatchDuration.Hours, lastMatchDuration.Minutes);
-            
-            StringBuilder text = new StringBuilder();
-            text.AppendLine($"Last match of {lookupName}");
-            text.AppendLine($"--------------------------------------------------");
-            text.AppendLine($"{lastMatch.God.Replace("_"," ")}");
-            text.AppendLine($"{lastMatch.Kills,2} / {lastMatch.Deaths,2} / {lastMatch.Assists,2} - {lastMatchDurationText} - {lastMatch.Win_Status}");
-            text.AppendLine($"Gold {lastMatch.Gold} / Gold per Minute {lastMatch.Gold / lastMatch.Minutes}");
-            text.AppendLine($"--------------------------------------------------");
-            text.AppendLine($"Damage Gods:        {lastMatch.Damage,20}");
-            text.AppendLine($"Damage Minions:     {lastMatch.Damage_Bot,20}");
-            text.AppendLine($"Damage Struct:      {lastMatch.Damage_Structure,20}");
-            text.AppendLine($"Damage Taken:       {lastMatch.Damage_Taken,20}");
-            text.AppendLine($"--------------------------------------------------");
-            text.AppendLine($"Healing:            {lastMatch.Healing,20}");
-            text.AppendLine($"Healing Minions:    {lastMatch.Healing_Bot,20}");
-            text.AppendLine($"Healing Self:       {lastMatch.Healing_Player_Self,20}");
-            text.AppendLine($"--------------------------------------------------");
-            text.AppendLine($"Wards:              {lastMatch.Wards_Placed,20}");
-            text.AppendLine($"--------------------------------------------------");
-
-
-            return text.ToString();
-        }
-
+        
         private async Task<string> PrintPlayerRanked(string lookupName)
         {
             var player = await Smite.GetPlayer(lookupName);
