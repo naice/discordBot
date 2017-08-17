@@ -15,15 +15,53 @@ namespace discordBot
         private SmiteAPI.Smite Smite;
         private readonly string _smiteImageMakerPath;
         private readonly string _smiteImageMakerResultFolderPath;
+        private readonly string _smiteDataCacheFile;
+        private SmiteAPI.Model.God[] _godsCache;
+        private SmiteAPI.Model.Item[] _itemsCache;
 
         public SmiteBot(Config config)
         {
             _smiteImageMakerResultFolderPath = config.SmiteImageMakerResultFolderPath;
             _smiteImageMakerPath = config.SmiteImageMakerExcutable;
+            _smiteDataCacheFile = config.SmiteDataCache;
 
             Smite = new SmiteAPI.Smite(new SmiteAPI.Config(config.SmiteDevId, config.SmiteAuthKey) { SmiteEndpoint = config.SmiteEndpoint });
         }
 
+        public class SmiteDataCache
+        {
+            public SmiteAPI.Model.God[] Gods { get; set; }
+            public SmiteAPI.Model.Item[] Items { get; set; }
+        }
+        private async Task RefreshCacheIfNecessary()
+        {
+            var godCacheLastRefresh = DateTime.MinValue;
+            if (File.Exists(_smiteDataCacheFile))
+                godCacheLastRefresh = File.GetLastWriteTimeUtc(_smiteDataCacheFile);
+            if (DateTime.UtcNow - godCacheLastRefresh < TimeSpan.FromHours(24))
+            {
+                if (_godsCache == null || _itemsCache == null)
+                {
+                    var cache = Newtonsoft.Json.JsonConvert.DeserializeObject<SmiteDataCache>(
+                        File.ReadAllText(_smiteDataCacheFile));
+
+                    _godsCache = cache.Gods;
+                    _itemsCache = cache.Items;
+                }
+                return;
+            }
+
+            var gods = await Smite.GetGods(1);
+            var items = await Smite.GetItems(1);
+            if (gods != null && gods.Length > 0 &&
+                items != null && items.Length > 0)
+            {
+                _godsCache = gods;
+                _itemsCache = items;
+                File.WriteAllText(_smiteDataCacheFile, Newtonsoft.Json.JsonConvert.SerializeObject(
+                    new SmiteDataCache() { Gods = gods, Items = items }));
+            }            
+        }
 
         public async Task ProcessMessage(SocketMessage msg)
         {
@@ -31,6 +69,8 @@ namespace discordBot
 
             if (cmd.Success)
             {
+                await RefreshCacheIfNecessary();
+
                 var rankedMatch = cmd.Match("ranked");
                 if (rankedMatch.Success)
                 {
@@ -114,11 +154,17 @@ namespace discordBot
             var lastMatch = lastMatches[0];
             if (lastMatch == null || !string.IsNullOrEmpty(lastMatch.ret_msg))
             {
+#if DEBUG
+                throw new SmiteBotException($"No Matchdata found for {lookupName}! DEBUG-MSG:{lastMatch.ret_msg}");
+#else
                 throw new SmiteBotException($"No Matchdata found for {lookupName}!");
+#endif
             }
 
             var imageMakerData = new SmiteAPI.Model.SmiteImageMaker<object>()
             {
+                GodCache = _godsCache,
+                ItemCache = _itemsCache,
                 ImageType = SmiteAPI.Model.SmiteImageMakerImageType.LastMatch,
                 Data = lastMatch
             };
@@ -135,6 +181,8 @@ namespace discordBot
 
             var imageMakerData = new SmiteAPI.Model.SmiteImageMaker<object>()
             {
+                GodCache = _godsCache,
+                ItemCache = _itemsCache,
                 ImageType = SmiteAPI.Model.SmiteImageMakerImageType.RankedStats,
                 Data = player
             };
@@ -151,6 +199,8 @@ namespace discordBot
 
             var imageMakerData = new SmiteAPI.Model.SmiteImageMaker<object>()
             {
+                GodCache = _godsCache,
+                ItemCache = _itemsCache,
                 ImageType = SmiteAPI.Model.SmiteImageMakerImageType.Player,
                 Data = player
             };
@@ -180,7 +230,6 @@ namespace discordBot
 
             return text.ToString();
         }
-
         private async Task<string> PrintPlayer(string lookupName)
         {
             var player = await Smite.GetPlayer(lookupName);

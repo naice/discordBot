@@ -11,6 +11,7 @@ namespace discordBot
         public string SmiteDevId { get; set; }
         public string SmiteAuthKey { get; set; }
         public string SmiteEndpoint { get; set; }
+        public string SmiteDataCache { get; set; }
         public string SmiteImageMakerExcutable { get; set; }
         public string SmiteImageMakerResultFolderPath { get; set; }
 

@@ -79,6 +79,11 @@ namespace SmiteAPI
             }
         }
 
+        public Task<Model.God[]> GetGods(int languageCode)
+        {
+            return Request(() => JsonRequest.Get<Model.God[]>(_endpointBuilder.GetGods(languageCode)));
+        }
+
         public Task<Model.Player> GetPlayer(string playerName)
         {
             return Request(() => JsonRequest.Get<Model.Player>(_endpointBuilder.GetPlayer(playerName), true));
@@ -87,6 +92,10 @@ namespace SmiteAPI
         public Task<Model.MatchHistory[]> GetMatchHistory(string playerName)
         {
             return Request(() => JsonRequest.Get<Model.MatchHistory[]>(_endpointBuilder.GetMatchHistory(playerName)));
+        }
+        public Task<Model.Item[]> GetItems(int languageCode)
+        {
+            return Request(() => JsonRequest.Get<Model.Item[]>(_endpointBuilder.GetItems(languageCode)));
         }
     }
 }

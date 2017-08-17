@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Text;
@@ -35,6 +36,7 @@ namespace SmiteAPI
         private static async Task<string> Get(string url)
         {
             string jsonString = string.Empty;
+            
             try
             {
                 // Create HTTP-Request

@@ -9,6 +9,8 @@ namespace SmiteAPI.Model
     public enum SmiteImageMakerImageType { LastMatch, Player, RankedStats }
     public class SmiteImageMaker
     {
+        public God[] GodCache { get; set; }
+        public Item[] ItemCache { get; set; }
         public SmiteImageMakerImageType ImageType { get; set; }
     }
     public class SmiteImageMaker<T> : SmiteImageMaker

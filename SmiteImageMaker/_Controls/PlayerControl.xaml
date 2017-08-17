@@ -5,9 +5,91 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SmiteImageMaker"
              mc:Ignorable="d" 
-             d:DataContext="{d:DesignInstance Type=local:DesignTimePlayerControl, IsDesignTimeCreatable=True}"
-             d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-            
+             d:DataContext="{d:DesignInstance Type=local:DesignTimePlayer, IsDesignTimeCreatable=True}"
+             Width="430" Height="250">
+    <Grid d:DataContext="{Binding Data}">
+        <Grid.OpacityMask>
+            <VisualBrush Visual="{Binding ElementName=BorderMask}"/>
+        </Grid.OpacityMask>
+        <Border CornerRadius="15" Name="BorderMask" Background="White"/>
+        <Image Source="/Assets/bg02.jpg" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Top" Height="500"/>
+        <Rectangle Fill="#aa000000"/>
+
+        <Grid Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Image Width="24" Height="24" VerticalAlignment="Center" Source="{Binding Data.Avatar_URL}" Stretch="Fill" HorizontalAlignment="Left"/>
+            <TextBlock Style="{StaticResource FontMedium}" FontSize="20" Margin="30,0,0,0" VerticalAlignment="Center">
+                <Run Text="{Binding Data.Name}"/>
+            </TextBlock>
+            <TextBlock Style="{StaticResource FontLight}" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="{StaticResource Accent}">
+                <Run Text="{Binding Data.Team_Name, ConverterParameter=No Team, Converter={StaticResource IfNullThenParameter}}"/>
+            </TextBlock>
+            <Rectangle Height="0.6" Fill="#77FFFFFF" VerticalAlignment="Bottom"/>
+            <Grid Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,12,0,0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="100"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0" Width="80" Height="40">
+                        <TextBlock Style="{StaticResource FontLight}" FontSize="16" HorizontalAlignment="Center">
+                            <Run Text="{Binding Data.Wins}"/>
+                            <Run Text="Wins"/>
+                        </TextBlock>
+                        <Rectangle Height=".6" Fill="{StaticResource Foreground}"/>
+                        <TextBlock Style="{StaticResource FontLight}" FontSize="16" HorizontalAlignment="Center">
+                            <Run>
+                                <Run.Text>
+                                    <MultiBinding Converter="{StaticResource PercentageValueConverter}">
+                                        <Binding Path="Data.Wins"/>
+                                        <Binding Path="Data.Losses"/>
+                                    </MultiBinding>
+                                </Run.Text>
+                            </Run><Run Text="%"/>
+                        </TextBlock>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" Width="80" Height="40">
+                        <TextBlock Style="{StaticResource FontLight}" FontSize="16" HorizontalAlignment="Center">
+                            <Run Text="{Binding Data.Losses}"/>
+                            <Run Text="Losses"/>
+                        </TextBlock>
+                        <Rectangle Height=".6" Fill="{StaticResource Foreground}"/>
+                        <TextBlock Style="{StaticResource FontLight}" FontSize="16" HorizontalAlignment="Center">
+                            <Run>
+                                <Run.Text>
+                                    <MultiBinding Converter="{StaticResource PercentageValueConverter}">
+                                        <Binding Path="Data.Losses"/>
+                                        <Binding Path="Data.Wins"/>
+                                    </MultiBinding>
+                                </Run.Text>
+                            </Run><Run Text="%"/>
+                        </TextBlock>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2" Width="80" Height="40">
+                        <TextBlock Style="{StaticResource FontLight}" FontSize="16" HorizontalAlignment="Center">
+                            <Run Text="{Binding Data.Leaves}"/>
+                            <Run Text="Leaves"/>
+                        </TextBlock>
+                        <Rectangle Height=".6" Fill="{StaticResource Foreground}"/>
+                        <TextBlock Style="{StaticResource FontLight}" FontSize="16" HorizontalAlignment="Center">
+                            <Run>
+                                <Run.Text>
+                                    <MultiBinding Converter="{StaticResource PercentageValueConverter}" ConverterParameter="True">
+                                        <Binding Path="Data.Leaves"/>
+                                        <Binding Path="Data.Losses"/>
+                                        <Binding Path="Data.Wins"/>
+                                    </MultiBinding>
+                                </Run.Text>
+                            </Run><Run Text="%"/>
+                        </TextBlock>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </Grid>
+
     </Grid>
 </UserControl>

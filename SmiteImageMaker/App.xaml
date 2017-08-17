@@ -6,6 +6,12 @@
         <local:PentaKillValueConverter x:Key="PentaKillValueConverter"/>
         <local:MatchMinutesValueConverter x:Key="MatchMinutesValueConverter"/>
         <local:GoldPerMinuteValueConverter x:Key="GoldPerMinuteValueConverter"/>
+        <local:PercentageValueConverter x:Key="PercentageValueConverter"/>
+        <local:IfNullThenParameter x:Key="IfNullThenParameter"/>
+        <local:MatchToItemsConverter x:Key="MatchToItemsConverter"/>
+        <local:MatchToRelicsConverter x:Key="MatchToRelicsConverter"/>
+        <local:MatchToGodPropertyConverter x:Key="MatchToGodPropertyConverter"/>
+
 
         <SolidColorBrush x:Key="Accent" Color="#88FFE500"/>
         <SolidColorBrush x:Key="Foreground" Color="#88ffffff"/>

@@ -21,7 +21,7 @@ namespace discordBot
             _config = Config.Load(args.Length > 0 ? args[0] : null ?? CONFIG_PATH);
 
             //var smite = new SmiteAPI.Smite(new SmiteAPI.Config(_config.SmiteDevId, _config.SmiteAuthKey) { SmiteEndpoint = _config.SmiteEndpoint });
-            //var test = await smite.GetMatchHistory("Emmuss");
+            //var test = await smite.GetItems(1);
 
             _client = new DiscordSocketClient();
             _client.Log += Log;

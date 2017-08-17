@@ -51,5 +51,20 @@ namespace SmiteAPI
             var methodName = "getmatchhistory";
             return _smiteEndPoint + $"/{methodName}{_responseFormatUri}/{_developerId}/{_signatureProvider.GetSignature(methodName)}/{_session}/{_timestamp}/{player}";
         }
+
+        public string GetGods(int languageCode)
+        {
+            ////getgods[ResponseFormat]/{developerId}/{signature}/{session}/{timestamp}/{languageCode}
+            var methodName = "getgods";
+            return _smiteEndPoint + $"/{methodName}{_responseFormatUri}/{_developerId}/{_signatureProvider.GetSignature(methodName)}/{_session}/{_timestamp}/{languageCode}";
+        }
+        
+
+        public string GetItems(int languageCode)
+        {
+            ///getitems[ResponseFormat]/{developerId}/{signature}/{session}/{timestamp}/{languagecode}
+            var methodName = "getitems";
+            return _smiteEndPoint + $"/{methodName}{_responseFormatUri}/{_developerId}/{_signatureProvider.GetSignature(methodName)}/{_session}/{_timestamp}/{languageCode}";
+        }
     }
 }

@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace SmiteAPI.Model
 {
     public class Player : ResponseBase
     {
+        [Newtonsoft.Json.JsonIgnore]
+        public string Avatar_URL_Cache { get { return Path.Combine(CacheConfig.GodImagePath, Path.GetFileName(Avatar_URL)); } }
         public string Avatar_URL { get; set; }
         public string Created_Datetime { get; set; }
         public int Id { get; set; }

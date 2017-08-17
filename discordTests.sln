@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmiteImageMaker", "SmiteIma
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug Window|Any CPU = Debug Window|Any CPU
+		Debug Window|ARM = Debug Window|ARM
+		Debug Window|x64 = Debug Window|x64
+		Debug Window|x86 = Debug Window|x86
 		Debug|Any CPU = Debug|Any CPU
 		Debug|ARM = Debug|ARM
 		Debug|x64 = Debug|x64
@@ -21,6 +25,14 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BA90D9EF-B25E-4CEC-B442-300020992C29}.Debug Window|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA90D9EF-B25E-4CEC-B442-300020992C29}.Debug Window|Any CPU.Build.0 = Debug|Any CPU
+		{BA90D9EF-B25E-4CEC-B442-300020992C29}.Debug Window|ARM.ActiveCfg = Debug|Any CPU
+		{BA90D9EF-B25E-4CEC-B442-300020992C29}.Debug Window|ARM.Build.0 = Debug|Any CPU
+		{BA90D9EF-B25E-4CEC-B442-300020992C29}.Debug Window|x64.ActiveCfg = Debug|Any CPU
+		{BA90D9EF-B25E-4CEC-B442-300020992C29}.Debug Window|x64.Build.0 = Debug|Any CPU
+		{BA90D9EF-B25E-4CEC-B442-300020992C29}.Debug Window|x86.ActiveCfg = Debug|Any CPU
+		{BA90D9EF-B25E-4CEC-B442-300020992C29}.Debug Window|x86.Build.0 = Debug|Any CPU
 		{BA90D9EF-B25E-4CEC-B442-300020992C29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BA90D9EF-B25E-4CEC-B442-300020992C29}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA90D9EF-B25E-4CEC-B442-300020992C29}.Debug|ARM.ActiveCfg = Debug|Any CPU
@@ -37,6 +49,14 @@ Global
 		{BA90D9EF-B25E-4CEC-B442-300020992C29}.Release|x64.Build.0 = Release|Any CPU
 		{BA90D9EF-B25E-4CEC-B442-300020992C29}.Release|x86.ActiveCfg = Release|Any CPU
 		{BA90D9EF-B25E-4CEC-B442-300020992C29}.Release|x86.Build.0 = Release|Any CPU
+		{455D5C29-770E-41A8-9668-569F4525EE4E}.Debug Window|Any CPU.ActiveCfg = Debug|Any CPU
+		{455D5C29-770E-41A8-9668-569F4525EE4E}.Debug Window|Any CPU.Build.0 = Debug|Any CPU
+		{455D5C29-770E-41A8-9668-569F4525EE4E}.Debug Window|ARM.ActiveCfg = Debug|Any CPU
+		{455D5C29-770E-41A8-9668-569F4525EE4E}.Debug Window|ARM.Build.0 = Debug|Any CPU
+		{455D5C29-770E-41A8-9668-569F4525EE4E}.Debug Window|x64.ActiveCfg = Debug|Any CPU
+		{455D5C29-770E-41A8-9668-569F4525EE4E}.Debug Window|x64.Build.0 = Debug|Any CPU
+		{455D5C29-770E-41A8-9668-569F4525EE4E}.Debug Window|x86.ActiveCfg = Debug|Any CPU
+		{455D5C29-770E-41A8-9668-569F4525EE4E}.Debug Window|x86.Build.0 = Debug|Any CPU
 		{455D5C29-770E-41A8-9668-569F4525EE4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{455D5C29-770E-41A8-9668-569F4525EE4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{455D5C29-770E-41A8-9668-569F4525EE4E}.Debug|ARM.ActiveCfg = Debug|Any CPU
@@ -53,6 +73,14 @@ Global
 		{455D5C29-770E-41A8-9668-569F4525EE4E}.Release|x64.Build.0 = Release|Any CPU
 		{455D5C29-770E-41A8-9668-569F4525EE4E}.Release|x86.ActiveCfg = Release|Any CPU
 		{455D5C29-770E-41A8-9668-569F4525EE4E}.Release|x86.Build.0 = Release|Any CPU
+		{5521351F-8260-4329-8F3B-9E31E398B9AA}.Debug Window|Any CPU.ActiveCfg = Debug Window|Any CPU
+		{5521351F-8260-4329-8F3B-9E31E398B9AA}.Debug Window|Any CPU.Build.0 = Debug Window|Any CPU
+		{5521351F-8260-4329-8F3B-9E31E398B9AA}.Debug Window|ARM.ActiveCfg = Debug Window|Any CPU
+		{5521351F-8260-4329-8F3B-9E31E398B9AA}.Debug Window|ARM.Build.0 = Debug Window|Any CPU
+		{5521351F-8260-4329-8F3B-9E31E398B9AA}.Debug Window|x64.ActiveCfg = Debug Window|Any CPU
+		{5521351F-8260-4329-8F3B-9E31E398B9AA}.Debug Window|x64.Build.0 = Debug Window|Any CPU
+		{5521351F-8260-4329-8F3B-9E31E398B9AA}.Debug Window|x86.ActiveCfg = Debug Window|Any CPU
+		{5521351F-8260-4329-8F3B-9E31E398B9AA}.Debug Window|x86.Build.0 = Debug Window|Any CPU
 		{5521351F-8260-4329-8F3B-9E31E398B9AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5521351F-8260-4329-8F3B-9E31E398B9AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5521351F-8260-4329-8F3B-9E31E398B9AA}.Debug|ARM.ActiveCfg = Debug|Any CPU
