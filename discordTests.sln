@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmiteAPI", "SmiteAPI\SmiteA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmiteImageMaker", "SmiteImageMaker\SmiteImageMaker.csproj", "{5521351F-8260-4329-8F3B-9E31E398B9AA}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SmiteBotSetup", "SmiteBotSetup\SmiteBotSetup.vdproj", "{4CF48B7C-4871-4922-9296-633D0830E90F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug Window|Any CPU = Debug Window|Any CPU
@@ -97,6 +99,18 @@ Global
 		{5521351F-8260-4329-8F3B-9E31E398B9AA}.Release|x64.Build.0 = Release|Any CPU
 		{5521351F-8260-4329-8F3B-9E31E398B9AA}.Release|x86.ActiveCfg = Release|Any CPU
 		{5521351F-8260-4329-8F3B-9E31E398B9AA}.Release|x86.Build.0 = Release|Any CPU
+		{4CF48B7C-4871-4922-9296-633D0830E90F}.Debug Window|Any CPU.ActiveCfg = Debug
+		{4CF48B7C-4871-4922-9296-633D0830E90F}.Debug Window|ARM.ActiveCfg = Debug
+		{4CF48B7C-4871-4922-9296-633D0830E90F}.Debug Window|x64.ActiveCfg = Debug
+		{4CF48B7C-4871-4922-9296-633D0830E90F}.Debug Window|x86.ActiveCfg = Debug
+		{4CF48B7C-4871-4922-9296-633D0830E90F}.Debug|Any CPU.ActiveCfg = Debug
+		{4CF48B7C-4871-4922-9296-633D0830E90F}.Debug|ARM.ActiveCfg = Debug
+		{4CF48B7C-4871-4922-9296-633D0830E90F}.Debug|x64.ActiveCfg = Debug
+		{4CF48B7C-4871-4922-9296-633D0830E90F}.Debug|x86.ActiveCfg = Debug
+		{4CF48B7C-4871-4922-9296-633D0830E90F}.Release|Any CPU.ActiveCfg = Release
+		{4CF48B7C-4871-4922-9296-633D0830E90F}.Release|ARM.ActiveCfg = Release
+		{4CF48B7C-4871-4922-9296-633D0830E90F}.Release|x64.ActiveCfg = Release
+		{4CF48B7C-4871-4922-9296-633D0830E90F}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -175,6 +175,27 @@ namespace SmiteImageMaker
             throw new NotImplementedException();
         }
     }
+    public class PlayerToMasteryPercentageConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is SmiteAPI.Model.SmiteImageMaker<SmiteAPI.Model.Player> model)
+            {
+                var godCount = model.GodCache.Count();
+                if (model.Data.MasteryLevel == 0)
+                    return 0;
+
+                return Math.Round(model.Data.MasteryLevel / (double)godCount, 0) * 100;
+            }
+
+            return value;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
     public class IfNullThenParameter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

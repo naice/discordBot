@@ -11,6 +11,7 @@
         <local:MatchToItemsConverter x:Key="MatchToItemsConverter"/>
         <local:MatchToRelicsConverter x:Key="MatchToRelicsConverter"/>
         <local:MatchToGodPropertyConverter x:Key="MatchToGodPropertyConverter"/>
+        <local:PlayerToMasteryPercentageConverter x:Key="PlayerToMasteryPercentageConverter"/>
 
 
         <SolidColorBrush x:Key="Accent" Color="#88FFE500"/>
